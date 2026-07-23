@@ -1,0 +1,24 @@
+unit Routex.Core;
+
+interface
+
+type
+  IRoutex = interface
+    ['{16C24271-BB24-45CE-8A22-26A8F57FE5EF}']
+    procedure Start;
+  end;
+
+  TRoutex = class(TInterfacedObject, IRoutex)
+  public
+    procedure Start;
+  end;
+
+implementation
+
+procedure TRoutex.Executar;
+begin
+  //todo
+
+end;
+
+end.

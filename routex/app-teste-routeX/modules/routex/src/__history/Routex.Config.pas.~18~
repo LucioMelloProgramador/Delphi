@@ -1,0 +1,49 @@
+unit Routex.Config;
+
+interface
+
+uses
+  Routex.ValidarObjeto;
+
+type
+  TConfig = class
+  private
+    FPort: Integer;
+    FBaseUrl: string;
+    FPrefix: String;
+    FToken: String;
+    FIsConfigValido: boolean;
+    FMessage: String;
+    FConfig: TConfig;
+  public
+    property Port: Integer read FPort write FPort;
+    property BaseUrl: string read FBaseUrl write FBaseUrl;
+    property Prefix: string read FPrefix write FPrefix;
+    property Token: string read FToken write FToken;
+    property IsConfigValido: boolean read FIsConfigValido;
+    property Mensagem: String read FMessage;
+    property Config: TConfig read FConfig;
+
+    constructor Create();
+    function validarConfig(InstanciaConfig: TObject): String;
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+constructor TConfig.Create;
+begin
+  inherited Create;
+end;
+
+function TConfig.validarConfig(InstanciaConfig: TObject): String;
+var
+  ValidarObjeto: TValidarObjeto;
+begin
+  ValidarObjeto := TValidarObjeto.Create;
+  Self.FIsConfigValido := ValidarObjeto.ValidarObjeto(InstanciaConfig, Self.FMessage);
+end;
+
+end.

@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E298E88D-6C01-4E3A-A454-067A8D223ADE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="App_Teste_Routex.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="App_Teste_Routex">
+        <MSBuild Projects="App_Teste_Routex.dproj"/>
+    </Target>
+    <Target Name="App_Teste_Routex:Clean">
+        <MSBuild Projects="App_Teste_Routex.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="App_Teste_Routex:Make">
+        <MSBuild Projects="App_Teste_Routex.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="App_Teste_Routex"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="App_Teste_Routex:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="App_Teste_Routex:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

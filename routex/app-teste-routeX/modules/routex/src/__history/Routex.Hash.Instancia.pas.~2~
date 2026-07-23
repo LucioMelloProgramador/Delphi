@@ -1,0 +1,34 @@
+unit Routex.Hash.Instancia;
+
+interface
+
+  type
+    THashInstnce = class
+      public
+        constructor Create;
+        function HashDaInstancia: string;
+    end;
+
+implementation
+
+uses
+  System.Hash, System.SysUtils;
+
+constructor THashInstance.Create;
+begin
+  inherited Create;
+end;
+
+function HashDaInstancia: string;
+var
+  TextoBase: string;
+begin
+  TextoBase :=
+    GetEnvironmentVariable('COMPUTERNAME') + '|' +
+    GetEnvironmentVariable('USERNAME') + '|' +
+    ExtractFilePath(ParamStr(0));
+
+  Result := THashSHA2.GetHashString(TextoBase);
+end;
+
+end.

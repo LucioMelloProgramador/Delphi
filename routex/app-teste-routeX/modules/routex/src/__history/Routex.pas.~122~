@@ -1,0 +1,114 @@
+unit Routex;
+
+interface
+
+uses
+  System.SysUtils,
+  System.Net.HttpClient,
+  Horse,
+  Routex.Client,
+  Routex.Config,
+  Routex.Routes,
+  Routex.Consumer,
+  Routex.ValidarObjeto;
+
+type
+  IRoutex = interface
+    ['{16C24271-BB24-45CE-8A22-26A8F57FE5EF}']
+    procedure Start;
+  end;
+
+  TRoutex = class(TInterfacedObject, IRoutex)
+  private
+    FClient: TClient;
+    FConfig: TConfig;
+    FInstanceMessage: String;
+  public
+    {propoerty}
+    property Config: TConfig read FConfig;
+    property InstanceMessage: String read FInstanceMessage write FInstanceMessage;
+    {procedures, constructors, destructors}
+    procedure Configure(Port: Integer; BaseUrl: String;
+      Prefix: String; Token: String);
+    procedure Start;
+    procedure Shutdown;
+    destructor Destroy; override;
+    {functions}
+    function Consumer(URL: string): string;
+    function GetReturnLog: string;
+    function ValidarConfig: boolean;
+  end;
+
+implementation
+
+function TRoutex.Consumer(URL: string): string;
+begin
+  Result := Routex.Consumer.Consumer(URL);
+end;
+
+procedure TRoutex.Configure(Port: Integer; BaseUrl: String;
+  Prefix: String; Token: String);
+begin
+  if Assigned(FConfig) then
+    FreeAndNil(FConfig);
+  FConfig := TConfig.Create;
+  FConfig.Port := Port;
+  FConfig.BaseUrl := BaseUrl;
+  FConfig.Prefix := Prefix;
+  FConfig.Token := Token;
+end;
+
+function TRoutex.ValidarConfig: boolean;
+begin
+  if not Assigned(FConfig) then
+  begin
+    FInstanceMessage := 'Configure must be called before Start.';
+    Exit(False);
+  end;
+  var Validador := TValidarObjeto.Create;
+  try
+    Result := Validador.Validar(FConfig, FInstanceMessage);
+    Self.InstanceMessage := FInstanceMessage;
+  finally
+    Validador.Free;
+  end;
+
+end;
+
+procedure TRoutex.Start;
+begin
+  if not ValidarConfig then
+     raise Exception.Create(instanceMessage);
+  try
+    FClient := TClient.Create(Config.BaseUrl);
+    RegisterRoutes(FClient, Config.BaseUrl, Config.Prefix, Config.Token);
+    THorse.Listen(Config.Port);
+    instanceMessage :=  Format('Routex listening on port %d', [Config.Port])
+      + Format(' - Base URL of this instance: %s', [Config.BaseUrl]);
+  except
+    on E: Exception do
+    begin
+      Writeln(E.ClassName + ': ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TRoutex.Shutdown;
+begin
+  THorse.StopListen;
+  FreeAndNil(FClient);
+end;
+
+function TRoutex.GetReturnLog: string;
+begin
+ Result := '[' + TimeToStr(Time) + '] ' + instanceMessage;
+end;
+
+destructor TRoutex.Destroy;
+begin
+  FreeAndNil(FClient);
+  FreeAndNil(FConfig);
+  inherited;
+end;
+
+end.

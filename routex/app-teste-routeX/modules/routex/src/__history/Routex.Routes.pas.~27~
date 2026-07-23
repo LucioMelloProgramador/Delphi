@@ -1,0 +1,66 @@
+unit Routex.Routes;
+
+interface
+
+uses
+  Horse,
+  Routex.Client,
+  Routex.Config;
+
+procedure RegisterRoutes(AClient: TClient; BaseURL: string;
+  Prefix: string; Token: String);
+function CheckContentType(ContentType: string): string;
+
+implementation
+
+uses
+  System.SysUtils;
+
+function ExtractPath(const RawPath: string; BaseURL: string): string;
+begin
+  Result := RawPath;
+  if Result.StartsWith(BaseURL, True) then
+    Result := Copy(Result, Length(BaseURL) + 1, MaxInt)
+  else
+    Result := Result.TrimLeft(['/']);
+end;
+
+procedure RegisterRoutes(AClient: TClient; BaseURL: string;
+  Prefix: string; Token: String);
+begin
+  THorse.Get(BaseURL,
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    var
+     msg: String;
+    begin
+      msg := format('{"message":"Use %s{endpoint} '  +
+              'para acessar os servicos da API selecionada"}', [BaseURL]);
+      Res
+        .ContentType('application/json; charset=utf-8')
+        .Send(msg);
+    end);
+
+  THorse.Get('/*',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    var
+      ClientResponse: TClientResponse;
+      Path: string;
+      Query: string;
+    begin
+      Path := ExtractPath(Req.RawWebRequest.PathInfo, BaseURL);
+      Query := Req.RawWebRequest.Query;
+      ClientResponse := AClient.Get(Path, Query, BaseURL, Prefix, Token);
+      Res.Status(ClientResponse.StatusCode)
+         .ContentType(CheckContentType(ClientResponse.ContentType))
+         .Send(ClientResponse.Body);
+    end);
+end;
+
+function CheckContentType(ContentType: string): string;
+begin
+  Result := ContentType;
+  if ContentType.Contains('application/json') then
+    Result := 'application/json; charset=utf-8';
+end;
+
+end.

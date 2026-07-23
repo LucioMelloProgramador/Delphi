@@ -1,0 +1,23 @@
+unit Routex.Consumer;
+
+interface
+
+uses
+  Horse;
+
+function Consumer(BaseURL: String): THorseResponse;
+
+implementation
+
+function Consumer(BaseURL: String): THorseResponse;
+begin
+  THorse.Get(BaseURL,
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    begin
+      Res
+        .ContentType('application/json; charset=utf-8')
+        .Send('{"message":"Use sua_base_url{endpoint} para acessar os servicos da API selecionada"}');
+    end);
+end;
+
+end.

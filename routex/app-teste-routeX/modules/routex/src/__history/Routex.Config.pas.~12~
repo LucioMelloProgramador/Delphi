@@ -1,0 +1,55 @@
+unit Routex.Config;
+
+interface
+
+type
+  TConfig = class
+  private
+    Port: Integer;
+    BaseUrl: string;
+    Prefix: string;
+    IsConfigValido: boolean;
+    FPort: Integer;
+    FBaseUrl: string;
+    FPrefix: String;
+    FIsConfigValido: boolean;
+  public
+    property Port: Integer read FPort write FPort;
+    property BaseUrl: string read FBaseUrl write FBaseUrl;
+    property Prefix: string read FPrefix write FPrefix;
+    property IsConfigValido: boolean read FIsConfigValido;
+
+    constructor Create();
+    function validarConfig: String;
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+constructor TConfig.Create;
+begin
+  inherited Create;
+end;
+
+function TConfig.validarConfig: String;
+begin
+  try
+    Self.FIsConfigValido := True;
+    if Self.FBaseUrl.IsEmpty then
+      raise Exception.Create('A url de base deve ser difinida.');
+    if Self.FPort <= 0 then
+      raise Exception.Create('A porta deve ser maior que zero.');
+    if Self.FPrefix.IsEmpty then
+      raise Exception.Create('Um prefixo deve ser difinida.');
+  except
+    on E: Exception do
+    begin
+      Result := E.Message;
+      Self.FIsConfigValido := false;
+    end;
+  end;
+end;
+
+end.

@@ -1,0 +1,32 @@
+unit Routex.Consumer;
+
+interface
+
+uses
+  Horse,
+  System.SysUtils,
+  System.Net.HttpClient;
+
+function Consumer(URL: String): IHTTPResponse;
+
+implementation
+
+function Consumer(URL: String): IHTTPResponse;
+var
+  HttpClient: THTTPClient;
+  HttpResponse: IHTTPResponse;
+begin
+  HttpClient := THTTPClient.Create;
+  try
+    HttpClient.CustomHeaders['Accept'] := 'application/json';
+    HttpClient.CustomHeaders['Accept-Charset'] := 'utf-8';
+
+    HttpResponse := HttpClient.Get(URL);
+    Result := HttpResponse;
+
+  finally
+    HttpClient.Free;
+  end;
+end;
+
+end.

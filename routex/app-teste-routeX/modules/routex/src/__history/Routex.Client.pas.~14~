@@ -1,0 +1,74 @@
+unit Routex.Client;
+
+interface
+
+type
+  TClientResponse = record
+    StatusCode: Integer;
+    Body: string;
+    ContentType: string;
+  end;
+
+  TClient = class
+  private
+    FBaseUrl: string;
+    function BuildUrl(const Path, Query: string; BaseUrl: string; Prefix: String): string;
+  public
+    constructor Create(const ABaseUrl: string);
+    function Get(const Path, Query: string; BaseUrl: String;
+                    Prefix: String; Token: String): TClientResponse;
+  end;
+
+implementation
+
+uses
+  System.Net.HttpClient,
+  System.SysUtils,
+  System.Classes;
+
+constructor TClient.Create(const ABaseUrl: string);
+begin
+  inherited Create;
+  FBaseUrl := ABaseUrl.TrimRight(['/']);
+end;
+
+function TClient.BuildUrl(const Path, Query: string; BaseUrl: String; Prefix: String): string;
+var
+  NormalizedPath: string;
+begin
+//  BaseUrl := BaseUrl.TrimRight(['/']);
+  NormalizedPath := Path.TrimLeft(['/']);
+  Result := Prefix + '/' + NormalizedPath;
+
+  if not Query.IsEmpty then
+    Result := Result + '?' + Query;
+end;
+
+function TClient.Get(const Path, Query: string;
+              BaseUrl: String;  Prefix: String; Token: String): TClientResponse;
+var
+  HttpClient: THTTPClient;
+  HttpResponse: IHTTPResponse;
+begin
+  HttpClient := THTTPClient.Create;
+  try
+    HttpClient.CustomHeaders['Accept'] := 'application/json';
+    HttpClient.CustomHeaders['Accept-Charset'] := 'utf-8';
+    if Token <> EmptyStr then
+    begin
+      HttpClient.CustomHeaders['Authorization'] := 'Bearer ' + Token;
+    end;
+
+    HttpResponse := HttpClient.Get(BuildUrl(Path, Query, BaseUrl, Prefix));
+
+    Result.StatusCode := HttpResponse.StatusCode;
+    Result.Body := HttpResponse.ContentAsString(TEncoding.UTF8);
+    Result.ContentType := HttpResponse.MimeType;
+    if Result.ContentType.IsEmpty then
+      Result.ContentType := 'application/json; charset=utf-8';
+  finally
+    HttpClient.Free;
+  end;
+end;
+
+end.

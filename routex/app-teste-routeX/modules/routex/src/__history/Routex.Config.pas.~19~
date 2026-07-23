@@ -1,0 +1,34 @@
+unit Routex.Config;
+
+interface
+
+uses
+  Routex.ValidarObjeto;
+
+type
+  TConfig = class
+  private
+    FPort: Integer;
+    FBaseUrl: string;
+    FPrefix: String;
+    FToken: String;
+  public
+    property Port: Integer read FPort write FPort;
+    property BaseUrl: string read FBaseUrl write FBaseUrl;
+    property Prefix: string read FPrefix write FPrefix;
+    property Token: string read FToken write FToken;
+
+    constructor Create();
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+constructor TConfig.Create;
+begin
+  inherited Create;
+end;
+
+end.

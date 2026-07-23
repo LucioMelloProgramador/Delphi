@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/07/29 18:28:44.000.897,=C:\Users\lucio.mello\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/07/30 10:45:57.000.341,=C:\Users\lucio.mello\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/03/10 13:27:40.000.421,=C:\Users\lucio.mello\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/05/27 15:49:40.000.521,=C:\Users\lucio.mello\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/06/09 16:00:31.000.830,=C:\Users\lucio.mello\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/06/09 16:01:58.000.091,C:\Users\lucio.mello\Desktop\Arquivos\Sistemas\App_Teste_routex\AppTesteRoutex.dfm=C:\Users\lucio.mello\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2026/06/09 16:01:58.000.091,C:\Users\lucio.mello\Desktop\Arquivos\Sistemas\App_Teste_routex\AppTesteRoutex.pas=C:\Users\lucio.mello\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/06/09 16:02:33.000.971,C:\Users\lucio.mello\Desktop\Arquivos\Sistemas\App_Teste_routex\App_Teste_Routex.dproj=C:\Users\lucio.mello\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2026/06/10 11:37:59.000.908,=C:\Users\lucio.mello\Desktop\Arquivos\Sistemas\App_Teste_routex\Unit1.pas</Transaction>
+    <Transaction>2026/06/10 11:39:12.000.911,C:\Users\lucio.mello\Desktop\Arquivos\Sistemas\App_Teste_routex\Unit1.pas=C:\Users\lucio.mello\Desktop\Arquivos\Sistemas\App_Teste_routex\modules\routex\src\Routex.Consumer.pas</Transaction>
+    <Transaction>2026/06/23 15:09:06.000.626,=C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\modules\routex\src\Routex.Core.pas</Transaction>
+    <Transaction>2026/06/23 15:09:06.000.955,=C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\modules\routex\src\Routex.pas</Transaction>
+    <Transaction>2026/06/23 15:09:06.000.632,=C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\modules\routex\src\Routex.Hash.Instancia.pas</Transaction>
+    <Transaction>2026/06/23 15:09:06.000.962,=C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\modules\routex\src\Routex.Routes.pas</Transaction>
+    <Transaction>2026/06/23 15:09:06.000.621,=C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\modules\routex\src\Routex.Config.pas</Transaction>
+    <Transaction>2026/06/23 15:09:06.000.613,=C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\modules\routex\src\Routex.Client.pas</Transaction>
+    <Transaction>2026/07/21 15:09:33.000.374,=C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\Unit1.pas</Transaction>
+    <Transaction>2026/07/21 15:10:48.000.295,C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\modules\routex\src\Routex.ValidarObjeto.pas=C:\Users\lucio.mello\Desktop\Arquivos\app-teste-routeX\Unit1.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="modules"/>
+    <File Path="modules\routex"/>
+    <File Path="modules\routex\src"/>
+    <File Path="modules\routex\src\Routex.Consumer.pas"/>
+    <File Path="modules\routex\src\Routex.Client.pas"/>
+    <File Path="modules\routex\src\Routex.Config.pas"/>
+    <File Path="modules\routex\src\Routex.Core.pas"/>
+    <File Path="modules\routex\src\Routex.Hash.Instancia.pas"/>
+    <File Path="modules\routex\src\Routex.pas"/>
+    <File Path="modules\routex\src\Routex.Routes.pas"/>
+    <File Path="modules\routex\src\Routex.ValidarObjeto.pas"/>
+    <File Path="AppTesteRoutex.pas"/>
+    <File Path="AppTesteRoutex.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

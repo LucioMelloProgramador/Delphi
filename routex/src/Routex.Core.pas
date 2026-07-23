@@ -1,0 +1,18 @@
+unit Routex.Core;
+
+interface
+
+type
+  TRoutexCore = class(TObject)
+  public
+    procedure Start;
+  end;
+
+implementation
+
+procedure TRoutexCore.Start;
+begin
+  //todo
+end;
+
+end.

@@ -1,0 +1,21 @@
+unit Routex.Config;
+
+interface
+
+type
+  TConfig = class
+  private
+    FPort: Integer;
+    FBaseUrl: string;
+    FPrefix: String;
+    FToken: String;
+  public
+    property Port: Integer read FPort write FPort;
+    property BaseUrl: string read FBaseUrl write FBaseUrl;
+    property Prefix: string read FPrefix write FPrefix;
+    property Token: string read FToken write FToken;
+  end;
+
+implementation
+
+end.

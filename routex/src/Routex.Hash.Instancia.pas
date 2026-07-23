@@ -1,0 +1,33 @@
+unit Routex.Hash.Instancia;
+
+interface
+
+  type
+    THashInstance = class
+      public
+        constructor Create;
+        class function HashDaInstancia: string;
+    end;
+
+implementation
+
+uses
+  System.Hash, System.SysUtils, Windows;
+
+constructor THashInstance.Create;
+begin
+  inherited Create;
+end;
+
+class function THashInstance.HashDaInstancia: string;
+var
+  TextoBase: string;
+  PID: Cardinal;
+begin
+  PID :=  GetCurrentProcessId;
+  TextoBase := GetEnvironmentVariable('COMPUTERNAME') + '|' +
+    GetEnvironmentVariable('USERNAME') + '|' + PID.ToString;
+  Result := THashSHA2.GetHashString(TextoBase);
+end;
+
+end.

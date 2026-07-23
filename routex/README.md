@@ -16,11 +16,13 @@ In practice, RouteX works as a simplified reverse proxy: once you configure a ba
 > *Na prática, o RouteX funciona como um proxy reverso simplificado: ao configurar uma URL base, uma porta e um prefixo, ele passa a redirecionar as requisições recebidas para a API de destino, repassando path, query string e cabeçalho de autenticação (Bearer Token), e devolvendo a resposta ao cliente original.*
 
 ## How to use / Como usar
+You can add the routex folder as a module of your application.
 
 1. Import `TRoutex`
 2. Use the `Configure` method to set the port, the local URL, the intended API (`BaseUrl`), and the required `Prefix`
 3. Run `Start`
 
+Voce pode adicionar a pasta routex como um módulo da sua aplicação. 
 > *1. Importar `TRoutex`
 > 2. Usar o método `Configure` para definir a porta, a URL local, a API pretendida (`BaseUrl`) e o `Prefix` necessário
 > 3. Executar `Start`*
